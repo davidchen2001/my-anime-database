@@ -1,31 +1,42 @@
 import React from 'react';
-import { ButtonGroup, Button, Form } from 'react-bootstrap';
+import { ButtonGroup, Button, Form, Container, Row, Col } from 'react-bootstrap';
 
 const Search = () => {
 
     return (
-        <div>
-            <ButtonGroup>
-                <Button>
-                    Search for Anime
-                </Button>
-                <Button>
-                    Search for Voice Actor
-                </Button>
-                <Button>
-                    Search for Username
-                </Button>
-            </ButtonGroup>
+        <Container>
+            <Row>
+                <ButtonGroup>
+                    <Col>
+                        <Button>
+                            Search for Anime
+                        </Button>
+                    </Col>
 
-            <Form>
-                <Form.Group>
-                    <Form.Control>
-                        
-                    </Form.Control>
-                </Form.Group>
-            </Form>
+                    <Col>
+                        <Button>
+                            Search for Voice Actor
+                        </Button>
+                    </Col>
 
-        </div>
+                    <Col>
+                        <Button>
+                            Search for User (Enter Username)
+                        </Button>
+                    </Col>
+
+                </ButtonGroup>
+            </Row>
+
+            <Row>
+                <Form>
+                    <Form.Group>
+                        <Form.Control>
+                        </Form.Control>
+                    </Form.Group>
+                </Form>
+            </Row>
+        </Container>
     );
 };
 
