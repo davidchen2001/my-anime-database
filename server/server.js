@@ -40,7 +40,7 @@ app.get("/api/anime/:id", (req, res) =>{
 
 app.get("/api/user", (req, res) =>{
 
-    let sql = "select * from users";
+    let sql = "select * from user";
     let params = []
     db.all(sql, params, (err, rows) => {
         if (err) 
@@ -53,10 +53,10 @@ app.get("/api/user", (req, res) =>{
     });
 });
 
-app.get("/api/user/:id", (req, res) =>{
+app.get("/api/user/:username", (req, res) =>{
 
-    let sql = "select * from users where id = ?";
-    let params = [req.params.id]
+    let sql = "select * from user where username = ?";
+    let params = [req.params.username]
     db.all(sql, params, (err, rows) => {
         if (err) 
         {
@@ -83,10 +83,10 @@ app.get("/api/actor", (req, res) =>{
     });
 });
 
-app.get("/api/actor/:id", (req, res) =>{
+app.get("/api/actor/:name", (req, res) =>{
 
-    let sql = "select * from voice_actor where id = ?";
-    let params = [req.params.id]
+    let sql = "select * from voice_actor where name = ?";
+    let params = [req.params.name]
     db.all(sql, params, (err, rows) => {
         if (err) 
         {
@@ -100,8 +100,85 @@ app.get("/api/actor/:id", (req, res) =>{
 
 /* N:N Relationship: Query all the anime watched by a specific user */
 
+app.get("/api/watched/:username", (req, res) =>{
+
+    let sql = "select * from (watched join user where username = ?)";
+    let params = [req.params.username]
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
+
 /* N:N Relationship: Query all the users who have watched a specific anime */
+
+app.get("/api/watched/:id", (req, res) =>{
+
+    let sql = "select * from (watched join anime where anime_id = ?)";
+    let params = [req.params.id]
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
 
 /* N:N Relationship: Query all the voice actors of an anime */
 
+app.get("/api/voiced/:id", (req, res) =>{
+
+    let sql = "select * from (voiced join anime where anime_id = ?)";
+    let params = [req.params.id]
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
+
 /* N:N Relationship: Query all the animes with a specific voice actor */
+
+app.get("/api/voiced/:name", (req, res) =>{
+
+    let sql = "select * from (voiced join anime where actor_name = ?)";
+    let params = [req.params.name]
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
+
+/* Secondary Query: Query all of the voice actors and their character names of a specific anime */
+
+app.get("/api/characters/:username", (req, res) =>{
+
+    let sql = "select actor_name, character_name from (select * from (anime join watched where username = ?))";
+    let params = [req.params.username]
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
