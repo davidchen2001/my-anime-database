@@ -29,7 +29,7 @@ let db = new sqlite3.Database('./anime.db', sqlite3.OPEN_READWRITE, (err) => {
                     primary key(anime_id, username)
                 );
                 CREATE TABLE user(
-                    username text, PRIMARY KEY,
+                    username text PRIMARY KEY,
                     name text,
                     password text
                 );
@@ -37,12 +37,21 @@ let db = new sqlite3.Database('./anime.db', sqlite3.OPEN_READWRITE, (err) => {
             (err) => {
                 if (err)
                 {
-                    console.log("Table already created");
-
+                    console.log("Table already created");                
                 }
                 else 
                 {
                     console.log("Table created");
+
+                    const anime_insert = "INSERT into anime (title, genre, studio) values (?,?,?)";
+
+                    const voiceActor_insert = "INSERT into voice_actor values (?)";
+
+                    const voiced_insert = "INSERT into voiced values (?, ?, ?)";
+
+                    const user_insert = "INSERT into user values (?, ?, ?)";
+
+                    const watched_insert = "INSERT into watched values (?, ?)";
                 }
             });
     }
