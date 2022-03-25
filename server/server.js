@@ -83,6 +83,22 @@ app.get("/api/user/:username", (req, res) =>{
     });
 });
 
+app.post("/api/login", (req, res) =>{
+
+    let sql = "select username, password from user where username = ? and password = ?";
+    let {username, password} = req.body;
+
+    db.all(sql, username, password, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
+
 app.get("/api/actor", (req, res) =>{
 
     let sql = "select * from voice_actor";
