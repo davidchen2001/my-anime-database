@@ -38,6 +38,21 @@ app.get("/api/anime/:id", (req, res) =>{
     });
 });
 
+app.get("/api/anime/:title", (req, res) =>{
+
+    let sql = "select * from anime where title = ?";
+    let params = [req.params.title]
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
+
 app.get("/api/user", (req, res) =>{
 
     let sql = "select * from user";

@@ -81,6 +81,8 @@ let db = new sqlite3.Database('./anime.db', sqlite3.OPEN_READWRITE, (err) => {
 
                     const voiceActor_insert = "INSERT into voice_actor values (?)";
 
+                    //9 Voice Actors - All voiced multiple characters
+
                     db.run(voiceActor_insert, "Kana Hanazawa"); 
                     db.run(voiceActor_insert, "Yui Ishikawa");
                     db.run(voiceActor_insert, "Natsuki Hanae");
@@ -91,10 +93,13 @@ let db = new sqlite3.Database('./anime.db', sqlite3.OPEN_READWRITE, (err) => {
                     db.run(voiceActor_insert, "Ayane Sakura");
                     db.run(voiceActor_insert, "Inori Minase");
 
-
                     const voiced_insert = "INSERT into voiced values (?, ?, ?)";
 
                     const user_insert = "INSERT into user values (?, ?, ?)";
+
+                    //1 user 
+
+                    db.run(user_insert, ["David Chen, David Chen, password"]);
 
                     const watched_insert = "INSERT into watched values (?, ?)";
                 }
