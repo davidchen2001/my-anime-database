@@ -1,14 +1,4 @@
-const sqlite3 = require("sqlite3").verbose();
-
-let db = new sqlite3.Database('./anime.db', (err) => {
-    if (err) 
-    {
-        console.error(err.message);
-    }
-    else
-    {
-        console.log("Connected to the anime database");
-        db.run(`CREATE TABLE voice_actor(
+CREATE TABLE voice_actor(
                     name text PRIMARY KEY
                 );
                 CREATE TABLE voiced(
@@ -151,33 +141,4 @@ let db = new sqlite3.Database('./anime.db', (err) => {
                 INSERT into watched values ("Attack on Titan", "Eden Chan");
                 INSERT into watched values ("Rascal Does Not Dream of Bunny Girl Senpai", "Eden Chan");
                 INSERT into watched values ("Your Name", "Eden Chan");
-                `,
-            (err) => {
-                if (err)
-                {
-                    console.log("Table already created");                
-                }
-                else 
-                {
-                    console.log("Table just created");
-
-                    /*
-
-                    //33 anime
-
-                    //9 VA's
-
-                    //38 voiced relationships 
-
-                    //3 users
-
-                    //21 watched relationships
-                    
-                    */
-
-                }
-            });
-    }
-});
-
-module.exports = db;
+                
