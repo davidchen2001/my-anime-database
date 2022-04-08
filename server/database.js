@@ -67,6 +67,36 @@ let db = new sqlite3.Database('./anime.db', sqlite3.OPEN_READWRITE, (err) => {
 });
 
 db.run(`
+        CREATE TABLE voice_actor(
+            name text PRIMARY KEY
+        )
+        `,
+        (err) => {
+            if (err)
+            {
+                console.log("Table already created");                
+            }
+            else 
+            {
+                console.log("Table created");
+
+                const voiceActor_insert = "INSERT into voice_actor values (?)";
+
+                //9 Voice Actors - All voiced multiple characters
+
+                db.run(voiceActor_insert, "Kana Hanazawa"); 
+                db.run(voiceActor_insert, "Yui Ishikawa");
+                db.run(voiceActor_insert, "Natsuki Hanae");
+                db.run(voiceActor_insert, "Sora Amamiya");
+                db.run(voiceActor_insert, "Rie Takahashi");
+                db.run(voiceActor_insert, "Ai Kayano");
+                db.run(voiceActor_insert, "Yoshitsugu Matsuoka");
+                db.run(voiceActor_insert, "Ayane Sakura");
+                db.run(voiceActor_insert, "Inori Minase");
+            }
+});
+
+db.run(`
         CREATE TABLE voiced(
             actor_name text,
             anime_title text,
@@ -74,97 +104,138 @@ db.run(`
             primary key(actor_name, anime_title)
         )
         `,
-            (err) => {
-                if (err)
-                {
-                    console.log("Table already created");                
-                }
-                else 
-                {
-                    console.log("Table created");
+        (err) => {
+            if (err)
+            {
+                console.log("Table already created");                
+            }
+            else 
+            {
+                console.log("Table created");
 
-                    const voiceActor_insert = "INSERT into voice_actor values (?)";
+                const voiced_insert = "INSERT into voiced values (?, ?, ?)";
 
-                    //9 Voice Actors - All voiced multiple characters
+                //38 relationships 
 
-                    db.run(voiceActor_insert, "Kana Hanazawa"); 
-                    db.run(voiceActor_insert, "Yui Ishikawa");
-                    db.run(voiceActor_insert, "Natsuki Hanae");
-                    db.run(voiceActor_insert, "Sora Amamiya");
-                    db.run(voiceActor_insert, "Rie Takahashi");
-                    db.run(voiceActor_insert, "Ai Kayano");
-                    db.run(voiceActor_insert, "Yoshitsugu Matsuoka");
-                    db.run(voiceActor_insert, "Ayane Sakura");
-                    db.run(voiceActor_insert, "Inori Minase");
-                }
-            });
+                db.run(voiced_insert, ["Kana Hanazawa", "Angel Beats", "Kanade Tachibana"]);
+                db.run(voiced_insert, ["Kana Hanazawa", "The Quintessential Quintuplets", "Ichika Nakano"]);
+                db.run(voiced_insert, ["Kana Hanazawa", "Demon Slayer: Kimetsu no Yaiba", "Mitsuri Kanroji"]);
+                db.run(voiced_insert, ["Kana Hanazawa", "The Garden of Words", "Yukari Yukino"]);
+                db.run(voiced_insert, ["Kana Hanazawa", "Your Name", "Yukari Yukino"]);
+
+                db.run(voiced_insert, ["Yui Ishikawa", "Violet Evergarden", "Violet Evergarden"]);
+                db.run(voiced_insert, ["Yui Ishikawa", "Attack on Titan", "Mikasa Ackerman"]);
+                db.run(voiced_insert, ["Yui Ishikawa", "A Silent Voice", "Miyoko Sahara"]);
+
+                db.run(voiced_insert, ["Natsuki Hanae", "Demon Slayer: Kimetsu no Yaiba", "Tanjiro Kamado"]);
+                db.run(voiced_insert, ["Natsuki Hanae", "Your Lie In April", "Kōsei Arima"]);
+
+                db.run(voiced_insert, ["Sora Amamiya", "Plastic Memories", "Isla"]);
+                db.run(voiced_insert, ["Sora Amamiya", "KonoSuba: God's Blessing on this Wonderful World!", "Aqua"]);
+                db.run(voiced_insert, ["Sora Amamiya", "Rascal Does Not Dream of Bunny Girl Senpai", "Uzuki Hirokawa"]);
+                db.run(voiced_insert, ["Sora Amamiya", "Rent-A-Girlfriend", "Chizuru Mizuhara"]);
+
+                db.run(voiced_insert, ["Rie Takahashi", "Rent-A-Girlfriend", "Sumi Sakurasawa"]);
+                db.run(voiced_insert, ["Rie Takahashi", "KonoSuba: God's Blessing on this Wonderful World!", "Megumin"]);
+                db.run(voiced_insert, ["Rie Takahashi", "Re:Zero - Starting Life in Another World", "Emilia, Satella"]);
+
+                db.run(voiced_insert, ["Ai Kayano", "KonoSuba: God's Blessing on this Wonderful World!", "Darkness"]);
+                db.run(voiced_insert, ["Ai Kayano", "Anohana: The Flower We Saw That Day", "Menma"]);
+                db.run(voiced_insert, ["Ai Kayano", "Golden Time", "Linda Hayashida"]);
+                db.run(voiced_insert, ["Ai Kayano", "No Game No Life", "Shiro"]);
+                db.run(voiced_insert, ["Ai Kayano", "Your Lie in April", "Nagi Aiza"]);
+                db.run(voiced_insert, ["Ai Kayano", "Demon Slayer: Kimetsu no Yaiba", "Kanae Kocho"]);
+
+                db.run(voiced_insert, ["Yoshitsugu Matsuoka", "Demon Slayer: Kimetsu no Yaiba", "Inosuke Hashibira"]);
+                db.run(voiced_insert, ["Yoshitsugu Matsuoka", "The Quintessential Quintuplets", "Fūtarō Uesugi"]);
+                db.run(voiced_insert, ["Yoshitsugu Matsuoka", "Puella Magi Madoka Magica", "Nakazawa"]);
+                db.run(voiced_insert, ["Yoshitsugu Matsuoka", "No Game No Life", "Sora"]);
+                db.run(voiced_insert, ["Yoshitsugu Matsuoka", "Re:Zero - Starting Life in Another World", "Petelgeuse Romanee-Conti"]);
+
+                db.run(voiced_insert, ["Ayane Sakura", "Your Lie in April", "Tsubaki Sawabe"]);
+                db.run(voiced_insert, ["Ayane Sakura", "The Quintessential Quintuplets", "Yotsuba Nakano"]);
+                db.run(voiced_insert, ["Ayane Sakura", "Attack on Titan", "Gabi Braun"]);
+                db.run(voiced_insert, ["Ayane Sakura", "Hotarubi no Mori e", "Hotaru Takegawa"]);
+                db.run(voiced_insert, ["Ayane Sakura", "Weathering with You", "Ayane Hanazawa"]);
+
+                db.run(voiced_insert, ["Inori Minase", "Your Lie in April", "Koharu Seto"]);
+                db.run(voiced_insert, ["Inori Minase", "Re:Zero - Starting Life in Another World", "Rem"]);
+                db.run(voiced_insert, ["Inori Minase", "Rascal Does Not Dream of Bunny Girl Senpai", "Shoko Makinohara"]);
+                db.run(voiced_insert, ["Inori Minase", "The Quintessential Quintuplets", "Itsuki Nakano"]);
+                db.run(voiced_insert, ["Inori Minase", "Made in Abyss", "Prushka"]);
+            }
+});
 
 db.run(`
-        CREATE TABLE voice_actor(
-            name text PRIMARY KEY
+        CREATE TABLE watched(
+            anime_title text,
+            username text,
+            primary key(anime_title, username)
         )
         `,
-            (err) => {
-                if (err)
-                {
-                    console.log("Table already created");                
-                }
-                else 
-                {
-                    console.log("Table created");
+        (err) => {
+        if (err)
+        {
+            console.log("Table already created");                
+        }
+        else 
+        {
+            console.log("Table created");
 
-                    const voiced_insert = "INSERT into voiced values (?, ?, ?)";
+            const watched_insert = "INSERT into watched values (?, ?)";
 
-                    //38 relationships 
+            //21 relationships
 
-                    db.run(voiced_insert, ["Kana Hanazawa", "Angel Beats", "Kanade Tachibana"]);
-                    db.run(voiced_insert, ["Kana Hanazawa", "The Quintessential Quintuplets", "Ichika Nakano"]);
-                    db.run(voiced_insert, ["Kana Hanazawa", "Demon Slayer: Kimetsu no Yaiba", "Mitsuri Kanroji"]);
-                    db.run(voiced_insert, ["Kana Hanazawa", "The Garden of Words", "Yukari Yukino"]);
-                    db.run(voiced_insert, ["Kana Hanazawa", "Your Name", "Yukari Yukino"]);
+            db.run(watched_insert, ["No Game No Life", "David Chen"]);
+            db.run(watched_insert, ["The Promised Neverland", "David Chen"]);
+            db.run(watched_insert, ["Your Lie In April", "David Chen"]);
+            db.run(watched_insert, ["Attack on Titan", "David Chen"]);
+            db.run(watched_insert, ["The Quintessential Quintuplets", "David Chen"]);
+            db.run(watched_insert, ["Rascal Does Not Dream of Bunny Girl Senpai", "David Chen"]);
+            db.run(watched_insert, ["Angel Beats", "David Chen"]);
+            db.run(watched_insert, ["Your Name", "David Chen"]);
+            db.run(watched_insert, ["KonoSuba: God's Blessing on this Wonderful World!", "David Chen"]);
+            db.run(watched_insert, ["Anohana: The Flower We Saw That Day", "David Chen"]);
+                    
+            db.run(watched_insert, ["No Game No Life", "Eric Huang"]);
+            db.run(watched_insert, ["The Quintessential Quintuplets", "Eric Huang"]);
+            db.run(watched_insert, ["Angel Beats", "Eric Huang"]);
+            db.run(watched_insert, ["Your Name", "Eric Huang"]);
+            db.run(watched_insert, ["KonoSuba: God's Blessing on this Wonderful World!", "Eric Huang"]);
+            db.run(watched_insert, ["Anohana: The Flower We Saw That Day", "Eric Huang"]);
 
-                    db.run(voiced_insert, ["Yui Ishikawa", "Violet Evergarden", "Violet Evergarden"]);
-                    db.run(voiced_insert, ["Yui Ishikawa", "Attack on Titan", "Mikasa Ackerman"]);
-                    db.run(voiced_insert, ["Yui Ishikawa", "A Silent Voice", "Miyoko Sahara"]);
+            db.run(watched_insert, ["Demon Slayer: Kimetsu no Yaiba", "Eden Chan"]);
+            db.run(watched_insert, ["Your Lie In April", "Eden Chan"]);
+            db.run(watched_insert, ["Attack on Titan", "Eden Chan"]);
+            db.run(watched_insert, ["Rascal Does Not Dream of Bunny Girl Senpai", "Eden Chan"]);
+            db.run(watched_insert, ["Your Name", "Eden Chan"]);
+        }
+});
 
-                    db.run(voiced_insert, ["Natsuki Hanae", "Demon Slayer: Kimetsu no Yaiba", "Tanjiro Kamado"]);
-                    db.run(voiced_insert, ["Natsuki Hanae", "Your Lie In April", "Kōsei Arima"]);
-
-                    db.run(voiced_insert, ["Sora Amamiya", "Plastic Memories", "Isla"]);
-                    db.run(voiced_insert, ["Sora Amamiya", "KonoSuba: God's Blessing on this Wonderful World!", "Aqua"]);
-                    db.run(voiced_insert, ["Sora Amamiya", "Rascal Does Not Dream of Bunny Girl Senpai", "Uzuki Hirokawa"]);
-                    db.run(voiced_insert, ["Sora Amamiya", "Rent-A-Girlfriend", "Chizuru Mizuhara"]);
-
-                    db.run(voiced_insert, ["Rie Takahashi", "Rent-A-Girlfriend", "Sumi Sakurasawa"]);
-                    db.run(voiced_insert, ["Rie Takahashi", "KonoSuba: God's Blessing on this Wonderful World!", "Megumin"]);
-                    db.run(voiced_insert, ["Rie Takahashi", "Re:Zero - Starting Life in Another World", "Emilia, Satella"]);
-
-                    db.run(voiced_insert, ["Ai Kayano", "KonoSuba: God's Blessing on this Wonderful World!", "Darkness"]);
-                    db.run(voiced_insert, ["Ai Kayano", "Anohana: The Flower We Saw That Day", "Menma"]);
-                    db.run(voiced_insert, ["Ai Kayano", "Golden Time", "Linda Hayashida"]);
-                    db.run(voiced_insert, ["Ai Kayano", "No Game No Life", "Shiro"]);
-                    db.run(voiced_insert, ["Ai Kayano", "Your Lie in April", "Nagi Aiza"]);
-                    db.run(voiced_insert, ["Ai Kayano", "Demon Slayer: Kimetsu no Yaiba", "Kanae Kocho"]);
-
-                    db.run(voiced_insert, ["Yoshitsugu Matsuoka", "Demon Slayer: Kimetsu no Yaiba", "Inosuke Hashibira"]);
-                    db.run(voiced_insert, ["Yoshitsugu Matsuoka", "The Quintessential Quintuplets", "Fūtarō Uesugi"]);
-                    db.run(voiced_insert, ["Yoshitsugu Matsuoka", "Puella Magi Madoka Magica", "Nakazawa"]);
-                    db.run(voiced_insert, ["Yoshitsugu Matsuoka", "No Game No Life", "Sora"]);
-                    db.run(voiced_insert, ["Yoshitsugu Matsuoka", "Re:Zero - Starting Life in Another World", "Petelgeuse Romanee-Conti"]);
-
-                    db.run(voiced_insert, ["Ayane Sakura", "Your Lie in April", "Tsubaki Sawabe"]);
-                    db.run(voiced_insert, ["Ayane Sakura", "The Quintessential Quintuplets", "Yotsuba Nakano"]);
-                    db.run(voiced_insert, ["Ayane Sakura", "Attack on Titan", "Gabi Braun"]);
-                    db.run(voiced_insert, ["Ayane Sakura", "Hotarubi no Mori e", "Hotaru Takegawa"]);
-                    db.run(voiced_insert, ["Ayane Sakura", "Weathering with You", "Ayane Hanazawa"]);
-
-                    db.run(voiced_insert, ["Inori Minase", "Your Lie in April", "Koharu Seto"]);
-                    db.run(voiced_insert, ["Inori Minase", "Re:Zero - Starting Life in Another World", "Rem"]);
-                    db.run(voiced_insert, ["Inori Minase", "Rascal Does Not Dream of Bunny Girl Senpai", "Shoko Makinohara"]);
-                    db.run(voiced_insert, ["Inori Minase", "The Quintessential Quintuplets", "Itsuki Nakano"]);
-                    db.run(voiced_insert, ["Inori Minase", "Made in Abyss", "Prushka"]);
-                }
-            });
-
+db.run(`
+        CREATE TABLE user(
+            username text PRIMARY KEY,
+            name text,
+            password text
+        )
+        `,
+        (err) => {
+            if (err)
+            {
+                console.log("Table already created");                
+            }
+            else 
+            {
+                console.log("Table created");
+    
+                const user_insert = "INSERT into user values (?, ?, ?)";
+    
+                //3 users
+    
+                db.run(user_insert, ["David Chen, David Chen, password"]);
+                db.run(user_insert, ["Eric Huang, Eric Huang, password"]);
+                db.run(user_insert, ["Eden Chan, Eden Chan, password"]);
+            }       
+});
 
 module.exports = db;
