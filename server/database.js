@@ -18,11 +18,11 @@ let db = new sqlite3.Database('./anime.db', sqlite3.OPEN_READWRITE, (err) => {
             (err) => {
                 if (err)
                 {
-                    console.log("Table already created");                
+                    console.log("Anime Table already created");                
                 }
                 else 
                 {
-                    console.log("Table created");
+                    console.log("Anime Table created");
 
                     const anime_insert = "INSERT into anime (title, genre, studio) values (?,?,?)";
 
@@ -74,11 +74,11 @@ db.run(`
         (err) => {
             if (err)
             {
-                console.log("Table already created");                
+                console.log("Voice Actor Table already created");                
             }
             else 
             {
-                console.log("Table created");
+                console.log("Voice Actor Table created");
 
                 const voiceActor_insert = "INSERT into voice_actor values (?)";
 
@@ -107,11 +107,11 @@ db.run(`
         (err) => {
             if (err)
             {
-                console.log("Table already created");                
+                console.log("Voiced Table already created");                
             }
             else 
             {
-                console.log("Table created");
+                console.log("Voiced Table created");
 
                 const voiced_insert = "INSERT into voiced values (?, ?, ?)";
 
@@ -176,11 +176,11 @@ db.run(`
         (err) => {
         if (err)
         {
-            console.log("Table already created");                
+            console.log("Watched Table already created");                
         }
         else 
         {
-            console.log("Table created");
+            console.log("Watched Table created");
 
             const watched_insert = "INSERT into watched values (?, ?)";
 
@@ -222,19 +222,19 @@ db.run(`
         (err) => {
             if (err)
             {
-                console.log("Table already created");                
+                console.log("User Table already created");                
             }
             else 
             {
-                console.log("Table created");
+                console.log("User Table created");
     
                 const user_insert = "INSERT into user values (?, ?, ?)";
     
                 //3 users
     
-                db.run(user_insert, ["David Chen, David Chen, password"]);
-                db.run(user_insert, ["Eric Huang, Eric Huang, password"]);
-                db.run(user_insert, ["Eden Chan, Eden Chan, password"]);
+                db.run(user_insert, ["David Chen", "David Chen", "password"]);
+                db.run(user_insert, ["Eric Huang", "Eric Huang", "password"]);
+                db.run(user_insert, ["Eden Chan", "Eden Chan", "password"]);
             }       
 });
 
