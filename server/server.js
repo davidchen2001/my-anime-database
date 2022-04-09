@@ -180,7 +180,7 @@ app.get("/api/voiced/anime/:title", (req, res) =>{
 
 app.get("/api/voiced/actor/:name", (req, res) =>{
 
-    let sql = "select anime_title, character_name from (voiced join voice_actor on (voiced.actor_name = voice_actor.name)) where actor_name = ?";
+    let sql = "select anime_title from (voiced join voice_actor on (voiced.actor_name = voice_actor.name)) where actor_name = ?";
     let params = [req.params.name]
     db.all(sql, params, (err, rows) => {
         if (err) 
@@ -193,12 +193,12 @@ app.get("/api/voiced/actor/:name", (req, res) =>{
     });
 });
 
-/* Secondary Query: Query all of the voice actors and their character names of a specific anime */
+/* Secondary Query: Query all of the voice actors and then their character names */
 
-app.get("/api/characters/:username", (req, res) =>{
+app.get("/api/characters/:actor", (req, res) =>{
 
-    let sql = "select actor_name, character_name from (select * from (anime join watched where username = ?))";
-    let params = [req.params.username]
+    let sql = "select character_name from (voiced join (select name from voice_actor) on (voiced.actor_name = name)) where actor_name = ?";
+    let params = [req.params.actor]
     db.all(sql, params, (err, rows) => {
         if (err) 
         {
