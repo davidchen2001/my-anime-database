@@ -216,7 +216,6 @@ db.run(`
         CREATE TABLE user(
             username text PRIMARY KEY,
             name text,
-            password text
         )
         `,
         (err) => {
@@ -228,13 +227,13 @@ db.run(`
             {
                 console.log("User Table created");
     
-                const user_insert = "INSERT into user values (?, ?, ?)";
+                const user_insert = "INSERT into user values (?, ?)";
     
                 //3 users
     
-                db.run(user_insert, ["David Chen", "David Chen", "password"]);
-                db.run(user_insert, ["Eric Huang", "Eric Huang", "password"]);
-                db.run(user_insert, ["Eden Chan", "Eden Chan", "password"]);
+                db.run(user_insert, ["David Chen", "David Chen"]);
+                db.run(user_insert, ["Eric Huang", "Eric Huang"]);
+                db.run(user_insert, ["Eden Chan", "Eden Chan"]);
             }       
 });
 
