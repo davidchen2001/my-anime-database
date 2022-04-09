@@ -4,24 +4,44 @@ import { ButtonGroup, Button, Form, Container, Row, Col } from 'react-bootstrap'
 
 const Search = () => {
 
+    const [data, setData] = useState({
+        search: "", 
+    });
+
+    const submitAnime = () => {
+
+    }
+
+    const submitActor = () => {
+
+    }
+
+    const submitUser = () => {
+
+    }
+
+    const handleChange = (e) => {
+        setData({search: e.target.value});
+    }
+
     return (
         <Container>
             <Row>
                 <ButtonGroup>
                     <Col>
-                        <Button>
+                        <Button variant = "primary" type = "submit" onClick={submitAnime}>
                             Search for Anime
                         </Button>
                     </Col>
 
                     <Col>
-                        <Button>
+                        <Button variant = "primary" type = "submit" onClick={submitActor}>
                             Search for Voice Actor
                         </Button>
                     </Col>
 
                     <Col>
-                        <Button>
+                        <Button variant = "primary" type = "submit" onClick = {submitUser}>
                             Search for User (Enter Username)
                         </Button>
                     </Col>
@@ -31,8 +51,8 @@ const Search = () => {
 
             <Row>
                 <Form>
-                    <Form.Group>
-                        <Form.Control>
+                    <Form.Group controlId = "search">
+                        <Form.Control type = "search" onChange = {handleChange}>
                         </Form.Control>
                     </Form.Group>
                 </Form>
