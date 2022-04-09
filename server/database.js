@@ -97,6 +97,32 @@ db.run(`
 });
 
 db.run(`
+        CREATE TABLE user(
+            username text PRIMARY KEY,
+            name text
+        )
+        `,
+        (err) => {            
+        if (err)
+        {
+            console.log(err);
+            console.log("User Table already created");                
+        }
+        else 
+        {
+            console.log("User Table created");
+    
+            const user_insert = "INSERT into user values (?, ?)";
+    
+            //3 users
+    
+            db.run(user_insert, ["David Chen", "David Chen"]);
+            db.run(user_insert, ["Eric Huang", "Eric Huang"]);
+            db.run(user_insert, ["Eden Chan", "Eden Chan"]);
+         }       
+});
+
+db.run(`
         CREATE TABLE voiced(
             actor_name text,
             anime_title text,
@@ -210,31 +236,6 @@ db.run(`
             db.run(watched_insert, ["Rascal Does Not Dream of Bunny Girl Senpai", "Eden Chan"]);
             db.run(watched_insert, ["Your Name", "Eden Chan"]);
         }
-});
-
-db.run(`
-        CREATE TABLE user(
-            username text PRIMARY KEY,
-            name text,
-        )
-        `,
-        (err) => {
-            if (err)
-            {
-                console.log("User Table already created");                
-            }
-            else 
-            {
-                console.log("User Table created");
-    
-                const user_insert = "INSERT into user values (?, ?)";
-    
-                //3 users
-    
-                db.run(user_insert, ["David Chen", "David Chen"]);
-                db.run(user_insert, ["Eric Huang", "Eric Huang"]);
-                db.run(user_insert, ["Eden Chan", "Eden Chan"]);
-            }       
 });
 
 module.exports = db;
