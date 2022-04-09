@@ -19,7 +19,11 @@ const Search = () => {
         axios.get(`/api/anime/${data.search}`)
         .then(response => {
             const responseData = response.data;
+            
             setAnime(responseData);
+
+            setActor([]);
+            setUser([]);
         })
         .catch(err => {
             console.log(err);
@@ -31,6 +35,9 @@ const Search = () => {
         .then(response => {
             const responseData = response.data;
             setActor(responseData);
+
+            setAnime([]);
+            setUser([]);
         })
         .catch(err => {
             console.log(err);
@@ -42,6 +49,9 @@ const Search = () => {
         .then(response => {
             const responseData = response.data;
             setUser(responseData);
+
+            setAnime([]);
+            setActor([]);
         })
         .catch(err => {
             console.log(err);
@@ -52,7 +62,20 @@ const Search = () => {
         setData({search: e.target.value});
     }
 
-    
+    let animeList = [];
+    anime.forEach(eachAnime => {
+        animeList.push(<AnimeCard title = {eachAnime.title} genre = {eachAnime.genre} studio = {eachAnime.studio} />)
+    });
+
+    let actorList = [];
+    actor.forEach(eachActor => {
+        actorList.push(<ActorCard name = {eachActor.name}/>)
+    });
+
+    let userList = [];
+    user.forEach(eachUser => {
+        userList.push(<UserCard username = {eachUser.username} name = {eachUser.name} />)
+    })
 
     return (
         <Container>
@@ -89,8 +112,11 @@ const Search = () => {
             </Row>
 
             <Col>
-            
+                {animeList}
+                {actorList}
+                {userList}
             </Col>
+
         </Container>
     );
 };

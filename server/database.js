@@ -105,7 +105,6 @@ db.run(`
         (err) => {            
         if (err)
         {
-            console.log(err);
             console.log("User Table already created");                
         }
         else 

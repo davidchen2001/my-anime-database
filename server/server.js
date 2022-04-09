@@ -29,7 +29,7 @@ app.get("/api/anime/:title", (req, res) =>{
 
     let sql = "select * from anime where title = ?";
     let params = [req.params.title]
-    db.get(sql, params, (err, rows) => {
+    db.all(sql, params, (err, rows) => {
         if (err) 
         {
             res.status(400).json(err);
@@ -59,7 +59,7 @@ app.get("/api/user/:username", (req, res) =>{
 
     let sql = "select * from user where username = ?";
     let params = [req.params.username]
-    db.get(sql, params, (err, rows) => {
+    db.all(sql, params, (err, rows) => {
         if (err) 
         {
             res.status(400).json(err);
@@ -89,7 +89,7 @@ app.get("/api/actor/:name", (req, res) =>{
 
     let sql = "select * from voice_actor where name = ?";
     let params = [req.params.name]
-    db.get(sql, params, (err, rows) => {
+    db.all(sql, params, (err, rows) => {
         if (err) 
         {
             res.status(400).json(err);
