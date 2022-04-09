@@ -1,11 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import { Card, FormLabel } from 'react-bootstrap';
+import React from 'react';
+import { Card, Button } from 'react-bootstrap';
 
 const ActorCard = (props) => {
 
     return(
         <Card>
-            <Card.Title>{props.name}</Card.Title>
+            <Card.Title>
+                <Button variant = "outline-dark">
+                    {props.name}
+                </Button>
+            </Card.Title>
         </Card>
     );
 }

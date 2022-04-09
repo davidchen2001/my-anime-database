@@ -75,7 +75,7 @@ const Search = () => {
     let userList = [];
     user.forEach(eachUser => {
         userList.push(<UserCard username = {eachUser.username} name = {eachUser.name} />)
-    })
+    });
 
     return (
         <Container>

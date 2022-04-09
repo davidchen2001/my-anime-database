@@ -1,11 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import { Card, FormLabel } from 'react-bootstrap';
+import React from 'react';
+import { Card, Button } from 'react-bootstrap';
 
 const UserCard = (props) => {
 
     return(
         <Card>
-            <Card.Title>{props.username}</Card.Title>
+            
+            <Card.Title>
+                <Button variant = "outline-dark">
+                    {props.username}
+                </Button>
+            </Card.Title>
 
             <Card.Text>Name: {props.name}</Card.Text>
 
