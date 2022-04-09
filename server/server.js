@@ -4,6 +4,8 @@ let db = require("./database.js");
 
 const PORT = 5000;
 
+app.use(express.json());
+
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
@@ -27,7 +29,7 @@ app.get("/api/anime/:title", (req, res) =>{
 
     let sql = "select * from anime where title = ?";
     let params = [req.params.title]
-    db.all(sql, params, (err, rows) => {
+    db.get(sql, params, (err, rows) => {
         if (err) 
         {
             res.status(400).json(err);
@@ -57,7 +59,7 @@ app.get("/api/user/:username", (req, res) =>{
 
     let sql = "select * from user where username = ?";
     let params = [req.params.username]
-    db.all(sql, params, (err, rows) => {
+    db.get(sql, params, (err, rows) => {
         if (err) 
         {
             res.status(400).json(err);
@@ -70,10 +72,19 @@ app.get("/api/user/:username", (req, res) =>{
 
 app.post("/api/login", (req, res) =>{
 
-    let sql = "select username, password from user where username = ? and password = ?";
-    let {username, password} = req.body;
+    if (!req.body.password) {
+        console.log("No password specified");
+    }
+    if (!req.body.username) {
+        console.log("No username specified");
+    }
 
-    db.all(sql, username, password, (err, rows) => {
+    let sql = "select username, password from user where username = ? and password = ?";
+
+    const username = req.body.username;
+    const password = req.body.password;
+
+    db.get(sql, username, password, (err, rows) => {
         if (err) 
         {
             res.status(400).json(err);
@@ -103,7 +114,7 @@ app.get("/api/actor/:name", (req, res) =>{
 
     let sql = "select * from voice_actor where name = ?";
     let params = [req.params.name]
-    db.all(sql, params, (err, rows) => {
+    db.get(sql, params, (err, rows) => {
         if (err) 
         {
             res.status(400).json(err);
