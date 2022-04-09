@@ -127,9 +127,9 @@ app.get("/api/actor/:name", (req, res) =>{
 
 /* N:N Relationship: Query all the anime watched by a specific user */
 
-app.get("/api/watched/:username", (req, res) =>{
+app.get("/api/watched/user/:username", (req, res) =>{
 
-    let sql = "select * from (watched join user where username = ?)";
+    let sql = "select anime_title from (watched join user on (watched.username = user.username)) where user.username = ?";
     let params = [req.params.username]
     db.all(sql, params, (err, rows) => {
         if (err) 
@@ -144,9 +144,9 @@ app.get("/api/watched/:username", (req, res) =>{
 
 /* N:N Relationship: Query all the users who have watched a specific anime */
 
-app.get("/api/watched/:title", (req, res) =>{
+app.get("/api/watched/anime/:title", (req, res) =>{
 
-    let sql = "select * from (watched join anime where anime_title = ?)";
+    let sql = "select anime_title, username from (watched join anime on (watched.anime_title = anime.title)) where anime.title = ?";
     let params = [req.params.title]
     db.all(sql, params, (err, rows) => {
         if (err) 
@@ -161,9 +161,9 @@ app.get("/api/watched/:title", (req, res) =>{
 
 /* N:N Relationship: Query all the voice actors of an anime */
 
-app.get("/api/voiced/:title", (req, res) =>{
+app.get("/api/voiced/anime/:title", (req, res) =>{
 
-    let sql = "select * from (voiced join anime where anime_title = ?)";
+    let sql = "select actor_name, character_name from (voiced join anime on (voiced.anime_title = anime.title)) where anime_title = ?";
     let params = [req.params.title]
     db.all(sql, params, (err, rows) => {
         if (err) 
@@ -178,9 +178,9 @@ app.get("/api/voiced/:title", (req, res) =>{
 
 /* N:N Relationship: Query all the animes with a specific voice actor */
 
-app.get("/api/voiced/:name", (req, res) =>{
+app.get("/api/voiced/actor/:name", (req, res) =>{
 
-    let sql = "select * from (voiced join anime where actor_name = ?)";
+    let sql = "select anime_title, character_name from (voiced join voice_actor on (voiced.actor_name = voice_actor.name)) where actor_name = ?";
     let params = [req.params.name]
     db.all(sql, params, (err, rows) => {
         if (err) 
