@@ -5,20 +5,28 @@ import { Card,Button } from 'react-bootstrap';
 const AnimeCard = (props) => {
 
     const [user, setUser] = useState([]);
+    const [actor, setActor] = useState([]);
     const [showWatched, setShowWatched] = useState(true);
 
     const submitUser = () => {
         if (showWatched)
         {
-            axios.get(`/api/watched/anime/${props.title}`)
-            .then(response => {
-                
+            const userRequest = axios.get(`/api/watched/anime/${props.title}`);
+            const actorRequest = axios.get(`/api/voiced/anime/${props.title}`);
+
+            axios.all([userRequest, actorRequest])
+            .then(axios.spread((...responses) => {
+
                 setShowWatched(false); 
 
-                const responseData = response.data;
-                
-                setUser(responseData);
-            })
+                const userData = responses[0].data;
+                const actorData = responses[1].data;
+
+                console.log(actorData);
+
+                setUser(userData);
+                setActor(actorData);
+            }))
             .catch(err => {
                 console.log(err);
             });
@@ -27,6 +35,7 @@ const AnimeCard = (props) => {
         else
         {
             setUser([]);
+            setActor([]);
             setShowWatched(true);
         }
     }
@@ -35,6 +44,12 @@ const AnimeCard = (props) => {
 
     user.forEach(eachUser => {
         watched.push(<Card.Text>{eachUser.username}</Card.Text>)
+    });
+
+    let actors = [];
+
+    actor.forEach(eachActor => {
+        actors.push(<Card.Text>{eachActor.actor_name}</Card.Text>)
     });
 
     return(
@@ -50,6 +65,9 @@ const AnimeCard = (props) => {
 
             {watched.length > 0 ? <Card.Title>Watched: </Card.Title> : null}
             {watched}
+
+            {actors.length > 0 ? <Card.Title>Voice Actors: </Card.Title> : null}
+            {actors}
         </Card>
     );
 }
