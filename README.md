@@ -12,3 +12,9 @@ Then enter the directory and setup dependencies
 cd /my-anime-database
 npm install
 ```
+
+To run the client and server locally
+
+```
+npm run app
+```
