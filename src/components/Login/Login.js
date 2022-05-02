@@ -30,8 +30,8 @@ const Login = () => {
                         </Col>
 
                         <Col xs = {6}>
-                            <Button variant="primary" type="submit">
-                                Register
+                            <Button href="/register" variant="primary" type="submit">
+                                Register 
                             </Button>
                         </Col>
                     </Row>

@@ -36,8 +36,9 @@ const Register = () => {
                         </Col>
 
                         <Col xs = {6}>
-                            <Button variant="primary" type="submit">
-                                Login
+                            
+                            <Button href="/" variant="primary" type="submit">
+                                Login 
                             </Button>
                         </Col>
                     </Row>
