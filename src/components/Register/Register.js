@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
-const Login = () => {
+const Register = () => {
 
     const [data, setData] = useState({
         username: "",
+        name: "",
         password: "", 
     });
 
@@ -13,6 +14,11 @@ const Login = () => {
            <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Username</Form.Label>
+                    <Form.Control placeholder="Enter username" />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Name</Form.Label>
                     <Form.Control placeholder="Enter username" />
                 </Form.Group>
 
@@ -31,7 +37,7 @@ const Login = () => {
 
                         <Col xs = {6}>
                             <Button variant="primary" type="submit">
-                                Register
+                                Login
                             </Button>
                         </Col>
                     </Row>
@@ -43,4 +49,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Register;
