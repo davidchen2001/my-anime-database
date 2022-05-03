@@ -237,4 +237,37 @@ db.run(`
         }
 });
 
+db.run(`
+        CREATE TABLE opening(
+            anime_title text,
+            title text PRIMARY KEY,
+            season integer
+        )
+        `,
+        (err) => {
+        if (err)
+        {
+            console.log("Opening Table already created");                
+        }
+        else 
+        {
+            console.log("Opening Table created");
+
+            const opening_insert = "INSERT into opening values (?, ?, ?)";
+
+            db.run(opening_insert, ["No Game No Life", "This Game", 1]);
+            db.run(opening_insert, ["The Promised Neverland", "Touch Off", 1]);
+            db.run(opening_insert, ["Your Lie In April", "Hikaru Nara", 1]);
+            db.run(opening_insert, ["Attack on Titan", "Crimson Bow and Arrow", 1]);
+            db.run(opening_insert, ["The Quintessential Quintuplets", "Gotoubun no Kimochi", 1]);
+            db.run(opening_insert, ["Rascal Does Not Dream of Bunny Girl Senpai", "Kimi no Sei", 1]);
+            db.run(opening_insert, ["Angel Beats", "My Soul, Your Beats!", 1]);
+            db.run(opening_insert, ["KonoSuba: God's Blessing on this Wonderful World!", "Fantastic Dreamer", 1]);
+            db.run(opening_insert, ["Anohana: The Flower We Saw That Day", "Aoi Shiori", 1]);
+            db.run(opening_insert, ["The Quintessential Quintuplets", "Go-Tōbun no Katachi", 2]);
+            db.run(opening_insert, ["KonoSuba: God's Blessing on this Wonderful World!", "Tomorrow", 2]);
+            db.run(opening_insert, ["Demon Slayer: Kimetsu no Yaiba", "Zankyou Sanka", 2]);
+        }
+});
+
 module.exports = db;

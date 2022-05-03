@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ButtonGroup, Button, Form, Container, Row, Col } from 'react-bootstrap';
 import AnimeCard from '../Card/AnimeCard';
 import ActorCard from '../Card/ActorCard';
-import UserCard from '../Card/UserCard';
+import SongCard from '../Card/SongCard';
 
 const Search = () => {
 
@@ -13,7 +13,7 @@ const Search = () => {
 
     const [anime, setAnime] = useState([]);
     const [actor, setActor] = useState([]);
-    const [user, setUser] = useState([]);
+    const [song, setSong] = useState([]);
 
     const submitAnime = () => {
         axios.get(`/api/anime/${data.search}`)
@@ -23,7 +23,7 @@ const Search = () => {
             setAnime(responseData);
 
             setActor([]);
-            setUser([]);
+            setSong([]);
         })
         .catch(err => {
             console.log(err);
@@ -37,18 +37,18 @@ const Search = () => {
             setActor(responseData);
 
             setAnime([]);
-            setUser([]);
+            setSong([]);
         })
         .catch(err => {
             console.log(err);
         });
     }
 
-    const submitUser = () => {
-        axios.get(`/api/user/${data.search}`)
+    const submitSong = () => {
+        axios.get(`/api/songs/${data.search}`)
         .then(response => {
             const responseData = response.data;
-            setUser(responseData);
+            setSong(responseData);
 
             setAnime([]);
             setActor([]);
@@ -72,9 +72,9 @@ const Search = () => {
         actorList.push(<ActorCard name = {eachActor.name}/>)
     });
 
-    let userList = [];
-    user.forEach(eachUser => {
-        userList.push(<UserCard username = {eachUser.username} name = {eachUser.name} />)
+    let songList = [];
+    song.forEach(eachSong => {
+        songList.push(<SongCard anime_title = {eachSong.anime_title} song_title = {eachSong.title} season = {eachSong.season} />)
     });
 
     return (
@@ -94,8 +94,8 @@ const Search = () => {
                     </Col>
 
                     <Col>
-                        <Button variant = "primary" type = "submit" onClick = {submitUser}>
-                            Search for User (Enter Username)
+                        <Button variant = "primary" type = "submit" onClick = {submitSong}>
+                            Search for Song 
                         </Button>
                     </Col>
 
@@ -114,7 +114,7 @@ const Search = () => {
             <Col>
                 {animeList}
                 {actorList}
-                {userList}
+                {songList}
             </Col>
 
         </Container>

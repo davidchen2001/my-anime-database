@@ -167,3 +167,49 @@ app.get("/api/characters/:actor", (req, res) =>{
         res.status(200).json(rows);
     });
 });
+
+app.get("/api/songs", (req, res) =>{
+
+    let sql = "select * from opening";
+    let params = [];
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
+
+app.get("/api/songs/:title", (req, res) =>{
+
+    let sql = "select * from opening where title = ?";
+    let params = [req.params.title]
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});
+
+/*
+app.get("/api/songs/:anime_title", (req, res) =>{
+
+    let sql = "select * from opening where anime_title = ?";
+    let params = [req.params.anime_title]
+    db.all(sql, params, (err, rows) => {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+
+        res.status(200).json(rows);
+    });
+});*/
