@@ -113,11 +113,7 @@ db.run(`
     
             const user_insert = "INSERT into user values (?, ?)";
     
-            //3 users
-    
             db.run(user_insert, ["David Chen", "David Chen"]);
-            db.run(user_insert, ["Eric Huang", "Eric Huang"]);
-            db.run(user_insert, ["Eden Chan", "Eden Chan"]);
          }       
 });
 
@@ -206,34 +202,6 @@ db.run(`
         else 
         {
             console.log("Watched Table created");
-
-            const watched_insert = "INSERT into watched values (?, ?)";
-
-            //21 relationships
-
-            db.run(watched_insert, ["No Game No Life", "David Chen"]);
-            db.run(watched_insert, ["The Promised Neverland", "David Chen"]);
-            db.run(watched_insert, ["Your Lie In April", "David Chen"]);
-            db.run(watched_insert, ["Attack on Titan", "David Chen"]);
-            db.run(watched_insert, ["The Quintessential Quintuplets", "David Chen"]);
-            db.run(watched_insert, ["Rascal Does Not Dream of Bunny Girl Senpai", "David Chen"]);
-            db.run(watched_insert, ["Angel Beats", "David Chen"]);
-            db.run(watched_insert, ["Your Name", "David Chen"]);
-            db.run(watched_insert, ["KonoSuba: God's Blessing on this Wonderful World!", "David Chen"]);
-            db.run(watched_insert, ["Anohana: The Flower We Saw That Day", "David Chen"]);
-                    
-            db.run(watched_insert, ["No Game No Life", "Eric Huang"]);
-            db.run(watched_insert, ["The Quintessential Quintuplets", "Eric Huang"]);
-            db.run(watched_insert, ["Angel Beats", "Eric Huang"]);
-            db.run(watched_insert, ["Your Name", "Eric Huang"]);
-            db.run(watched_insert, ["KonoSuba: God's Blessing on this Wonderful World!", "Eric Huang"]);
-            db.run(watched_insert, ["Anohana: The Flower We Saw That Day", "Eric Huang"]);
-
-            db.run(watched_insert, ["Demon Slayer: Kimetsu no Yaiba", "Eden Chan"]);
-            db.run(watched_insert, ["Your Lie In April", "Eden Chan"]);
-            db.run(watched_insert, ["Attack on Titan", "Eden Chan"]);
-            db.run(watched_insert, ["Rascal Does Not Dream of Bunny Girl Senpai", "Eden Chan"]);
-            db.run(watched_insert, ["Your Name", "Eden Chan"]);
         }
 });
 

@@ -4,27 +4,25 @@ import { Card,Button } from 'react-bootstrap';
 
 const AnimeCard = (props) => {
 
-    const [user, setUser] = useState([]);
+    const [song, setSong] = useState([]);
     const [actor, setActor] = useState([]);
     const [showWatched, setShowWatched] = useState(true);
 
     const submitUser = () => {
         if (showWatched)
         {
-            const userRequest = axios.get(`/api/watched/anime/${props.title}`);
+            const songRequest = axios.get(`/api/songs/anime/${props.title}`);
             const actorRequest = axios.get(`/api/voiced/anime/${props.title}`);
 
-            axios.all([userRequest, actorRequest])
+            axios.all([songRequest, actorRequest])
             .then(axios.spread((...responses) => {
 
                 setShowWatched(false); 
 
-                const userData = responses[0].data;
+                const songData = responses[0].data;
                 const actorData = responses[1].data;
 
-                console.log(actorData);
-
-                setUser(userData);
+                setSong(songData);
                 setActor(actorData);
             }))
             .catch(err => {
@@ -34,22 +32,22 @@ const AnimeCard = (props) => {
         }
         else
         {
-            setUser([]);
+            setSong([]);
             setActor([]);
             setShowWatched(true);
         }
     }
 
-    let watched = [];
+    let songs = [];
 
-    user.forEach(eachUser => {
-        watched.push(<Card.Text>{eachUser.username}</Card.Text>)
+    song.forEach(eachSong => {
+        songs.push(<Card.Text>Opening: {eachSong.title}, Season: {eachSong.season}</Card.Text>)
     });
 
     let actors = [];
 
     actor.forEach(eachActor => {
-        actors.push(<Card.Text>{eachActor.actor_name}</Card.Text>)
+        actors.push(<Card.Text>{eachActor.actor_name} voiced {eachActor.character_name}</Card.Text>)
     });
 
     return(
@@ -63,8 +61,8 @@ const AnimeCard = (props) => {
             <Card.Text>Genre: {props.genre}</Card.Text>
             <Card.Text>Studio: {props.studio}</Card.Text>
 
-            {watched.length > 0 ? <Card.Title>Watched: </Card.Title> : null}
-            {watched}
+            {songs.length > 0 ? <Card.Title>Openings: </Card.Title> : null}
+            {songs}
 
             {actors.length > 0 ? <Card.Title>Voice Actors: </Card.Title> : null}
             {actors}
