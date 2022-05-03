@@ -33,9 +33,32 @@ const ActorForm = () => {
                         </Col>
                     </Row>
                 </Container>
-                    
-            </Form> 
 
+                <Form.Group className="mb-3">
+                    <Form.Label>Anime </Form.Label>
+                    <Form.Control placeholder="Enter anime " />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Voiced </Form.Label>
+                    <Form.Control placeholder="Enter character's name" />
+                </Form.Group>
+
+                <Container>
+                    <Row>
+                        <Col xs = {6}>
+                            <Button variant="primary" type="submit">
+                                Submit
+                            </Button>
+                        </Col>
+                        <Col xs = {6}>
+                            <Button variant="primary" type="submit" href = "/anime-form">
+                                Add Anime
+                            </Button>
+                        </Col>
+                    </Row>
+                </Container>
+            </Form> 
         </div>
     );
 }
