@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Container } from 'react-bootstrap';
 
 const ActorCard = (props) => {
 
@@ -47,6 +47,10 @@ const ActorCard = (props) => {
 
             {characters.length > 0 ? <Card.Title>Voiced: </Card.Title> : null}
             {characters}
+
+            <Container>
+                <Button variant="secondary">Edit Info</Button>
+            </Container>
         </Card>
     );
 }

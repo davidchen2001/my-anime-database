@@ -8,8 +8,10 @@ import SongCard from '../Card/SongCard';
 const Search = () => {
 
     const [data, setData] = useState({
-        search: "", 
+        search: "",
     });
+
+    const [searched, setSearched] = useState("Anime");
 
     const [anime, setAnime] = useState([]);
     const [actor, setActor] = useState([]);
@@ -24,9 +26,11 @@ const Search = () => {
 
             setActor([]);
             setSong([]);
+            setSearched("Anime");
         })
         .catch(err => {
             console.log(err);
+            setSearched("Anime");
         });
     }
 
@@ -38,9 +42,11 @@ const Search = () => {
 
             setAnime([]);
             setSong([]);
+            setSearched("Actor");
         })
         .catch(err => {
             console.log(err);
+            setSearched("Actor");
         });
     }
 
@@ -52,10 +58,16 @@ const Search = () => {
 
             setAnime([]);
             setActor([]);
+            setSearched("Song");
         })
         .catch(err => {
             console.log(err);
+            setSearched("Song");
         });
+    }
+
+    const formPath = () =>{
+        return "/" + searched.toLowerCase() + "-form";
     }
 
     const handleChange = (e) => {
@@ -104,10 +116,21 @@ const Search = () => {
 
             <Row>
                 <Form>
-                    <Form.Group controlId = "search">
-                        <Form.Control type = "search" onChange = {handleChange}>
-                        </Form.Control>
-                    </Form.Group>
+                    <Container>
+                        <Row>
+                            <Col xs = {9}>
+                                <Form.Group controlId = "search">
+                                    <Form.Control type = "search" onChange = {handleChange}>
+                                    </Form.Control>
+                                </Form.Group>
+                                </Col>
+                            <Col xs = {2}>
+                                <Button variant="dark" href = {formPath()}>
+                                    Add {searched}
+                                </Button>
+                            </Col> 
+                        </Row>
+                    </Container>
                 </Form>
             </Row>
 

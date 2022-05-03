@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Container } from 'react-bootstrap';
 
 const SongCard = (props) => {
 
@@ -15,6 +15,10 @@ const SongCard = (props) => {
 
             <Card.Text>Anime: {props.anime_title}</Card.Text>
             <Card.Text>Season: {props.season}</Card.Text>
+
+            <Container>
+                <Button variant="secondary">Edit Info</Button>
+            </Container>
         </Card>
     );
 }

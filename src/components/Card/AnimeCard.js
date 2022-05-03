@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Card,Button } from 'react-bootstrap';
+import { Card,Button, Container, Row, Col } from 'react-bootstrap';
 
 const AnimeCard = (props) => {
 
@@ -66,6 +66,12 @@ const AnimeCard = (props) => {
 
             {actors.length > 0 ? <Card.Title>Voice Actors: </Card.Title> : null}
             {actors}
+
+            <Container>
+                <Button variant="secondary">Edit Info</Button>
+            </Container>
+
+            
         </Card>
     );
 }
