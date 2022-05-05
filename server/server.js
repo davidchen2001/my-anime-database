@@ -25,6 +25,30 @@ app.get("/api/anime", (req, res) =>{
     });
 });
 
+app.post("/api/anime", (req, res) =>{
+
+    const data = {
+        title: req.body.title,
+        genre: req.body.genre,
+        studio: req.body.studio 
+    }
+
+    let sql = "INSERT into anime (title, genre, studio) values (?,?,?)";
+    let params = [data.title, data.genre, data.studio];
+
+    db.run(sql, params, function(err, result) {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+        res.json({
+            "message": "success",
+            "data": data,
+        });
+    });
+});
+
 app.get("/api/anime/:title", (req, res) =>{
 
     let sql = "select * from anime where title = ?";
@@ -82,6 +106,28 @@ app.get("/api/actor", (req, res) =>{
         }
 
         res.status(200).json(rows);
+    });
+});
+
+app.post("/api/actor", (req, res) =>{
+
+    const data = {
+        name: req.body.name 
+    }
+
+    let sql = "INSERT into voice_actor values (?)";
+    let params = [data.name];
+
+    db.run(sql, params, function(err, result) {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+        res.json({
+            "message": "success",
+            "data": data,
+        });
     });
 });
 
@@ -180,6 +226,30 @@ app.get("/api/songs", (req, res) =>{
         }
 
         res.status(200).json(rows);
+    });
+});
+
+app.post("/api/songs", (req, res) =>{
+
+    const data = {
+        anime_title: req.body.anime,
+        title: req.body.title,
+        season: req.body.season
+    }
+
+    let sql = "INSERT into opening values (?, ?, ?)";
+    let params = [data.anime_title, data.title, data.season];
+
+    db.run(sql, params, function(err, result) {
+        if (err) 
+        {
+            res.status(400).json(err);
+            console.log(err);
+        }
+        res.json({
+            "message": "success",
+            "data": data,
+        });
     });
 });
 
